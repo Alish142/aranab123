@@ -1,20 +1,13 @@
-var express = require('express');
-const cors = require("cors"); // Import cors
+const express = require('express');
+const cors = require('cors'); // Make sure cors is required
+const app = express();
+const port = 3001;
 
-var app = express();
-// Enable CORS (must after initialise it)
+// Enable CORS for all origins
 app.use(cors());
 
-var Part2API = require("./controllerAPI/api-controller");
+// Your other middleware and routes go here
 
-var bodyparser=require("body-parser");
-
-app.use(bodyparser.json());
-app.use(bodyparser.urlencoded({extended:false}));
-
-app.use("/api/concerts", Part2API);
-
-
-app.listen(3060);
-
-console.log("Server up and running on port 3060");
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
+});

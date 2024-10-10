@@ -4,35 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fundraiser Details</title>
-    <link rel="stylesheet" href="/frontend/css/style.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #6dd5ed, #2193b0);
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            align-items: center;
+        }
+        header, main, footer {
+            margin-bottom: 20px;
+        }
+        header h1, footer p {
+            margin: 0;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.591);
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        nav a {
+    
+            color: rgb(16, 2, 2);
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 0 15px;
+            text-decoration: none;
+            transition: background-color 0.4s, box-shadow 0.6s;
+        }
+        nav a:hover {
+            background-color: rgba(241, 238, 238, 0.7);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        main {
+            flex-grow: 1;
+        }
+        #fundraiser-details {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        footer {
+            font-size: 0.8em;
+        }
+    </style>
 </head>
 <body>
     <header>
-    
+        <h1>Fundraiser Details</h1>
         <nav>
-            <img src="/frontend/src/img1.png" alt="Pariwartan Logo" class="logo">
-            <ul>
-                <li><a href="/frontend/src/index.html">Home</a></li>
-                <li><a href="/frontend/src/search.html">Search Fundraisers</a></li>
-            </ul>
-            <button type="button" onclick="showConstructionAlert()">Donate</button>
+            <a href="index.html">Home</a>
+            <a href="search.html">Search Fundraisers</a>
+            <a href="categories.html">Categories</a>
+            <a href="donation.html">Donate</a>
+            <a href="fundraiser.html">Fundraiser Details</a>
+            <a href="/adminside/admin.html">Manage Fundraiser</a>
         </nav>
     </header>
 
     <main>
-        <section id="fundraiser-details" class="card details-card">
-            <img id="fundraiser-image" src="" alt="Fundraiser Image" style="width: 100%; height: auto; display: none;">
-        </section>
-         <div class="action-buttons">
-                <button id="donate-btn">Donate</button>
-                <button id="return-btn">Return</button>
-            </div>
+        <div id="fundraiser-details">
+            <h2>Fundraiser Name</h2>
+            <p>Description: Please provide your information via email or call us on 133221.</p>
+            <p>Suburb: City, Pincode:, Country </p>
+            <p>Organizer: Tejinder Singh</p>
+            <p>Phone Number: 0001 223 432</p>
+            <p>Contact Email: <a href="mailto:t.singh.34@student.scu.edu.au" style="color: white;">Tejindersingh@gmail.com</a></p>
+            <p>Working Hours: 8:00 AM - 5:00 PM</p>
+        </div>
     </main>
-
+    
     <footer>
-        <p>© 2024 Pariwartan. All rights reserved.</p>
+        <p>&copy; 2024 Fundraising Platform</p>
     </footer>
-
-    <script src="/frontend/js/fundraiser.js"></script>
 </body>
 </html>

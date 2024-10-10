@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.591);
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        nav a {
+    
+            color: rgb(16, 2, 2);
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 0 15px;
+            text-decoration: none;
+            transition: background-color 0.4s, box-shadow 0.6s;
+        }
+        nav a:hover {
+            background-color: rgba(241, 238, 238, 0.7);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input[type="number"],
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #4cae4c;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="search.html">Search Fundraisers</a>
+        <a href="categories.html">Categories</a>
+        <a href="donation.html">Donate</a>
+        <a href="fundraiser.html">Fundraiser Details</a>
+        <a href="/adminside/admin.html">Manage Fundraiser</a>
+
+    </nav>
+
+<h1>Make a Donation</h1>
+<form id="donate-form">
+    <label for="fundraiser_id">Fundraiser ID:</label>
+    <input type="text" id="fundraiser_id" name="fundraiser_id" required>
+
+    <label for="amount">Amount:</label>
+    <input type="number" id="amount" name="amount" required>
+
+    <button type="submit">Donate</button>
+</form>
+
+<script>
+    document.getElementById('donate-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const fundraiserId = document.getElementById('fundraiser_id').value;
+    const amount = document.getElementById('amount').value;
+
+    fetch('http://localhost:8080/api/donations', {  // Full URL to match your server
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ fundraiser_id: fundraiserId, amount: amount }),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        alert('Donation successful: ' + JSON.stringify(data));
+        document.getElementById('donate-form').reset();
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+        alert('Donation failed: ' + error.message);
+    });
+});
+
+
+
+</script>
+
+</body>
+</html>

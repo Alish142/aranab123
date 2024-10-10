@@ -1,59 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width-device-width, initial-scale=1.0">
-        <title> Search fundraisers</title>
-        <link rel="Stylesheet" href="/frontend/css/style.css">
-    </head>
-
-    <body>
-        <header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Fundraiser</title>
+    <style>
+        body {
+            background-color: lightblue;
+            height: 120vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+        h1 {
+            font-size: 3em;
+        }
+        input[type="text"] {
+            padding: 20px;
+            margin-right: 20px;
+            border-radius: 6px;
+            border: none;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.591);
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        nav a {
     
-            <nav>
-                <img src="/frontend/src/img1.png" class=logo alt="Pariwartan logo">
-                <ul>
-                    <li><a href="/frontend/src/index.html"> Home </a></li>
-                    <li><a href="/frontend/src/search.html"> Search Fundraiser</a></li>
-                    <li><a href="/frontend/src/index.html"></a> <button type="button" class="donate-btn">Donate</button></li>
-                </ul>
-            </nav>
-        </header>
+            color: rgb(16, 2, 2);
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 0 15px;
+            text-decoration: none;
+            transition: background-color 0.4s, box-shadow 0.6s;
+        }
+        nav a:hover {
+            background-color: rgba(241, 238, 238, 0.7);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        #fundraiser-details {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        input[type="button"] {
+            padding: 15px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+        input[type="button"]:hover {
+            background-color: #0056b3;
+        }
+        #data {
+            margin-top: 20px;
+            font-size: 1.5em; /* Slightly smaller font for details */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Fundraiser Details</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="search.html">Search Fundraisers</a>
+            <a href="categories.html">Categories</a>
+            <a href="donation.html">Donate</a>
+            <a href="fundraiser.html">Fundraiser Details</a>
+            <a href="/adminside/admin.html">Manage Fundraiser</a>
+        </nav>
+    </header>
 
-        <main> 
-            <section id="search-form" class="card form-container">
-                <h2> Search Fundraisers</h2>
-                <form id="fundraisers-search-form">
-                    <div class="search-box">
-                        <input type="text" id="organizer" placeholder="Organizer">
-                        <input type="text" id="city" placeholder="City">
-                        <select id="category">
-                            <option value=""> Select Category</option>
-                        </select>
-                    
-                    </div>
+    <h2>Search Fundraiser With ID</h2>
+    <label for="txtID">ID: </label>
+    <input type="text" id="txtID" placeholder="Enter ID" required aria-label="Enter Fundraiser ID">
+    <input type="button" value="Search" onclick="let txtID = document.getElementById('txtID').value; searchByID(txtID);">
+    <div id="data"></div>
 
-                    <div class="button-group">
-                        <button type="submit">Search</button>
-                        <button type="button " id="clear-btn">Clear</button>
-                        
-                    </div>
-                </form>
-            </section>
-            <div id="search-results" class="grid-container"> </div>
-        </main>
-       
-        <script src="/frontend/js/search.js"></script>
+    <script>
+        function searchByID(id) {
+            const dataDiv = document.getElementById('data');
+
+            // Input validation
+            if (!id || isNaN(id.trim())) {
+                dataDiv.textContent = "Please enter a valid numeric ID.";
+                return;
+            }
 
 
+            fetch(`http://localhost:8080/api/search?categoryId=${categoryId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
 
-
-            
-        </div>
-    </body>
-    
-    <footer>
-        <p>&copy; 2024 Pariwartan. All rights reserved.</p>
-    </footer>
-
+                .then(data => {
+                    dataDiv.innerHTML = ""; // Clear loading message
+                    if (data) {
+                        const newP = document.createElement("p");
+                        newP.innerHTML = `
+                            Fundraiser: <strong>${data.organizer_name}</strong><br>
+                            Description: ${data.description}<br>
+                            City: ${data.city}<br>
+                            <a href="fundraiser.html?id=${id}" style="color: white;">View More Details</a>
+                        `;
+                        dataDiv.appendChild(newP);
+                    } else {
+                        dataDiv.textContent = "No data available for this ID.";
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    dataDiv.textContent = "Error fetching data. Please check the ID and try again.";
+                });
+        }
+    </script>
+</body>
 </html>

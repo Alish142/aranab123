@@ -4,6 +4,10 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+      "admin": "node adminside/adminserver.js",
+      "client": "node clientside/crowdfundings.js",
+      "server": "node serverside/server.js", 
+      "start": "concurrently \"npm run admin\" \"npm run client\" \"npm run server\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

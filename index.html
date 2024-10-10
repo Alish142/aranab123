@@ -3,40 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pariwartan</title>
-    <link rel="stylesheet" href="/frontend/css/style.css">
+    <title>Home Fundraising Portal</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: linear-gradient(135deg, #6dd5ed, #2193b0);
+            color: rgb(0, 0, 0);
+            text-align: center;
+            font-family: Arial, sans-serif;
+            min-height: 108vh;
+            margin: 10px;
+        }
+        header, main, footer {
+            margin-bottom: 20px;
+        }
+        header h1, footer p {
+            margin: 20px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.591);
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        nav a {
+    
+            color: rgb(16, 2, 2);
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 0 15px;
+            text-decoration: none;
+            transition: background-color 0.4s, box-shadow 0.6s;
+        }
+        nav a:hover {
+            background-color: rgba(241, 238, 238, 0.7);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        main {
+            flex-grow: 1;
+        }
+        #fundraiser-list {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(247, 244, 244, 0.808);
+            border-radius: 10px;
+        }
+        img {
+            max-width: 90%;
+            height: auto;
+            margin: 23px 0;
+            border-radius: 13px;
+            box-shadow: 0px 5px 15px rgba(60, 58, 58, 0.3);
+        }
+        footer {
+            font-size: 0.8em;
+        }
+        @media (max-width: 750px) {
+            nav a {
+                display: block;
+                margin: 11px 0;
+            }
+            img {
+                max-width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
+        <h1>Welcome to Our Fundraising Portal</h1>
         <nav>
-            <img src="/frontend/src/img1.png" class="logo" alt="Pariwartan logo">
-            <ul>
-                <li><a href="/frontend/src/index.html">Home</a></li>
-                <li><a href="/frontend/src/search.html">Search Fundraiser</a></li>
-                <li><a href="/frontend/src/index.html"></a> <button type="button" class="donate-btn">Donate</button></li>
-            </ul>
+            <a href="index.html">Home</a>
+            <a href="search.html">Search Fundraisers</a>
+            <a href="categories.html">Categories</a>
+            <a href="donation.html">Donate</a>
+            <a href="fundraiser.html">Fundraiser Details</a>
+            <a href="/adminside/admin.html">Manage Fundraiser</a>
+
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <h1>Welcome to Pariwartan</h1>
-        <p>Join us in making a difference. Support our fundraisers and change lives.</p>
-    </section>
-
-    <!-- Active Fundraisers Section -->
     <main>
-            <div class="grid">
-                <h2>Active Fundraisers</h2>
-                <div id="fundraisers-list" class="grid-container"></div>
-          
+        <h2>A Way to Do Something New.</h2>
+        <img src="fundraiser.png" alt="Fundraising Campaign Banner">
+        <div id="fundraiser-list">
+            <h3>Featured Fundraisers</h3>
+            <p>No services are going on right now. Please come back later!</p>
+        </div>
+        <p>Your support for this activity will take this program to the next level.</p>
+        <p><strong>How do we work?</strong> Our platform works as a team to assist in the main sectors of the industry, which are Education, Poverty alleviation, and Housing Crisis.</p>
+        <p><strong>Your support will be greatly appreciated.</strong></p>
     </main>
 
-  
-
-    <script src="/frontend/js/main.js"></script>
+    <footer>
+        <p>&copy; 2024 Agency and contributors. ABN 12 34 56 78 910. All rights reserved.</p>
+    </footer>
 </body>
-<footer>
-    <p>&copy; 2024 Pariwartan. All rights reserved.</p>
-</footer>
 </html>
+
+
+
+
+
+  
